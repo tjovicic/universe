@@ -1,0 +1,30 @@
+plan:
+    package: ./docker/tests/command-ssh
+name: docker-command-ssh
+inputs:
+    TestConfig.host:
+        text: 143.198.64.230
+    TestConfig.key:
+        secret: ENC[AES256_GCM,data:gb2yFGdX3oqjPpQmqn3gr0hqLAHMFBhzLEHI5Bi+VN5Op/SCSjfA5yEC0Olb/Brzssjp0i6PIPBPPwW+Pj/gDuSR6CqzGlAkF1Pz/Ks6R0zqWkcR0gFImXrfRzeflgpGagPBgPsRBtPcoY7WqJQ1Lue46cJe7OTNPRT+X9oDek7mk9ZiIpJCUQQVN0+alWStOPYuTjRlqcSfao+B6hnC2fMtcCWpVxz9Sj8UpSwX4EHLU5GsHr8ioD+BP7BCPlhP/aSKu1iwMaiMo6zRn6V+GtSGX4JrwN53CYSjGxi1g9RiFMCFxcWsDVA+hCnzAdzO3pMEmTL5xHZ9MoMLbOwEhN3Rnh+HX61uTq2DRfqGhKGtjXjcewOxb0NezGCj93Y0ov2TtBBo7wjYEi0AmI3ljCwoq9EDRYKg1a/w79FpGVpqoomd4XrJYbqP0SnHO0ZrsSLqKmqdIoDYbfxR7zprQQsN0ENOdDVf9WdTnHSJMSC5MTmyqAOogKZN1nNzW5LJQ2i0JUt1jl322RzdQ+brBLWiohVfenCy/23l,iv:gceSEfG6Eu2Pc9+JZpH0CLITNVnYFyN21drPneu15wk=,tag:zmYtioa5LTPZrSeFNmaBvg==,type:str]
+    TestConfig.user:
+        text: daggerci
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age:
+        - recipient: age1gxwmtwahzwdmrskhf90ppwlnze30lgpm056kuesrxzeuyclrwvpsupwtpk
+          enc: |
+            -----BEGIN AGE ENCRYPTED FILE-----
+            YWdlLWVuY3J5cHRpb24ub3JnL3YxCi0+IFgyNTUxOSBJSU5uMDBNdDEzQXFsb2ZS
+            VDRDai9yOHFPSnI4dXhDY0FUcXVkRXdMMXdBCnhSTER5bEJRRDNZbStVTTk5d2FN
+            MUxkM1JpQ3NHa3B4MHlnZ1dDU1RoS2cKLS0tIE9Xa1ovQkRSZlBZMjZlZi9OUGhG
+            UEpoZy9HZUlHOVV3M05OSkZQS1l6aXcK3NfBITvd6la6nkcIzqH69xfv9RR0Jm7x
+            vU5FvGROK3Z0ZR8NNXAtNH6VQQ21TDD2MOXWOVvjnIAAOVNEyc1amA==
+            -----END AGE ENCRYPTED FILE-----
+    lastmodified: "2021-07-08T09:52:59Z"
+    mac: ENC[AES256_GCM,data:Xd8UhlqoC9/tix66cUPdNffUiPjsofi+a2rvMaBUkzdki4oPO5bFawBIJeOmDML47KMMBlBy4fBkHKS0zaYLDU640ahLFiWI6og/pAEk7L4waRK7Aep2g63VvJmE9dtz22JyTStJLp7gFlK/Xngov+7IkjqxpQ/H3qGE4HqlHaA=,iv:mkSv8FufpVlAycli8qqj5UkxFnpSsUpnpbs+7M7b2wE=,tag:3qRTUf9h1MQGUYihkrTahQ==,type:str]
+    pgp: []
+    encrypted_suffix: secret
+    version: 3.7.1
