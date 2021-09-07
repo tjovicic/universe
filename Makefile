@@ -22,10 +22,10 @@ integration: core-integration universe-test
 .PHONY: core-integration
 core-integration:
 	yarn --cwd "./tests" install
-	DAGGER_BINARY="../cmd/dagger/dagger-debug" yarn --cwd "./tests" test
+	DAGGER_BINARY="/usr/local/bin/dagger" yarn --cwd "./tests" test
 
 .PHONY: universe-test
 universe-test:
 	yarn --cwd "./universe" install
-	DAGGER_BINARY="../cmd/dagger/dagger-debug" yarn --cwd "./universe" test
+	DAGGER_BINARY="/usr/local/bin/dagger" yarn --cwd "./universe" test
 
