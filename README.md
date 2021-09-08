@@ -16,3 +16,8 @@ Every version of `universe` is tested with a specific version of Cue and Dagger.
 `.github/workflows/ci.yml` under `env`. 
 
 Stable versions are git tagged with appropriate versions following semantic versioning. 
+
+## Supporting older versions
+
+For every new version we could move the previous stable version to a separate branch and continue to support them that 
+way.
