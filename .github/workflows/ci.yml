@@ -57,7 +57,7 @@ jobs:
         run: |
           export CUE_TARBALL="cue_${CUE_VERSION}_linux_amd64.tar.gz"
           echo "Installing cue version $CUE_VERSION"
-          curl -L https://github.com/cuelang/cue/releases/download/${CUE_VERSION}/${CUE_TARBALL} | sudo tar zxf - -C /usr/local/bin
+          curl -L -H "Authorization: token ${{ secrets.TEST_GITHUB_PAT }}" https://github.com/cuelang/cue/releases/download/${CUE_VERSION}/${CUE_TARBALL} | sudo tar zxf - -C /usr/local/bin
 
       - name: Install Dagger
         run: |
