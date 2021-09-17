@@ -8,7 +8,7 @@ on:
 
 env:
   CUE_VERSION: v0.4.0
-  DAGGER_VERSION: v0.1.0-alpha.24
+  DAGGER_VERSION: 0.1.0-alpha.25
 
 jobs:
   lint:
@@ -61,7 +61,7 @@ jobs:
 
       - name: Install Dagger
         run: |
-          export DAGGER_TARBALL="dagger_${DAGGER_VERSION}_linux_amd64.tar.gz"
+          export DAGGER_TARBALL="dagger_v${DAGGER_VERSION}_linux_amd64.tar.gz"
           echo "Installing dagger version $DAGGER_VERSION"
           curl -L https://dl.dagger.io/dagger/releases/${DAGGER_VERSION}/${DAGGER_TARBALL} | sudo tar zxf - -C /usr/local/bin
 
@@ -117,7 +117,7 @@ jobs:
 
       - name: Install Dagger
         run: |
-          export DAGGER_TARBALL="dagger_${DAGGER_VERSION}_linux_amd64.tar.gz"
+          export DAGGER_TARBALL="dagger_v${DAGGER_VERSION}_linux_amd64.tar.gz"
           echo "Installing dagger version $DAGGER_VERSION"
           curl -L https://dl.dagger.io/dagger/releases/${DAGGER_VERSION}/${DAGGER_TARBALL} | sudo tar zxf - -C /usr/local/bin
 
