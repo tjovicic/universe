@@ -6,13 +6,25 @@ import (
 	"alpha.dagger.io/dagger/op"
 )
 
-// Build a Docker image from source, using included Dockerfile
+// Build a Docker image from source
 #Build: {
-	source: dagger.#Artifact @dagger(input)
+	// Build context
+	source: dagger.#Input & {dagger.#Artifact}
+
+	// Dockerfile passed as a string
+	dockerfile: dagger.#Input & {*null | string}
+
+	args?: [string]: string
 
 	#up: [
 		op.#DockerBuild & {
 			context: source
+			if dockerfile != null {
+				"dockerfile": dockerfile
+			}
+			if args != _|_ {
+				buildArg: args
+			}
 		},
 	]
 
@@ -21,7 +33,7 @@ import (
 // Pull a docker container
 #Pull: {
 	// Remote ref (example: "index.docker.io/alpine:latest")
-	from: string @dagger(input)
+	from: dagger.#Input & {string}
 
 	#up: [
 		op.#FetchContainer & {ref: from},
@@ -31,18 +43,18 @@ import (
 // Push a docker image to a remote registry
 #Push: {
 	// Remote target (example: "index.docker.io/alpine:latest")
-	target: string @dagger(input)
+	target: dagger.#Input & {string}
 
 	// Image source
-	source: dagger.#Artifact @dagger(input)
+	source: dagger.#Input & {dagger.#Artifact}
 
 	// Registry auth
 	auth?: {
 		// Username
-		username: string @dagger(input)
+		username: dagger.#Input & {string}
 
 		// Password or secret
-		secret: string @dagger(input)
+		secret: dagger.#Input & {dagger.#Secret | string}
 	}
 
 	push: #up: [
@@ -72,7 +84,7 @@ import (
 				source: "/image_ref"
 			},
 		]
-	} @dagger(output)
+	} & dagger.#Output
 
 	// Image digest
 	digest: {
@@ -85,43 +97,43 @@ import (
 				source: "/image_digest"
 			},
 		]
-	} @dagger(output)
+	} & dagger.#Output
 }
 
 #Run: {
 	// Connect to a remote SSH server
 	ssh: {
 		// ssh host
-		host: string @dagger(input)
+		host: dagger.#Input & {string}
 
 		// ssh user
-		user: string @dagger(input)
+		user: dagger.#Input & {string}
 
 		// ssh port
-		port: *22 | int @dagger(input)
+		port: dagger.#Input & {*22 | int}
 
 		// private key
-		key: dagger.#Secret @dagger(input)
+		key: dagger.#Input & {dagger.#Secret}
 
 		// fingerprint
-		fingerprint?: string @dagger(input)
+		fingerprint?: dagger.#Input & {string}
 
 		// ssh key passphrase
-		keyPassphrase?: dagger.#Secret @dagger(input)
+		keyPassphrase?: dagger.#Input & {dagger.#Secret}
 	}
 
 	// Image reference (e.g: nginx:alpine)
-	ref: string @dagger(input)
+	ref: dagger.#Input & {string}
 
 	// Container name
-	name?: string @dagger(input)
+	name?: dagger.#Input & {string}
 
 	// Image registry
 	registry?: {
 		target:   string
 		username: string
 		secret:   dagger.#Secret
-	} @dagger(input)
+	} & dagger.#Input
 
 	#command: #"""
 		# Run detach container
@@ -144,21 +156,4 @@ import (
 			}
 		}
 	}
-}
-
-// Build a Docker image from the provided Dockerfile contents
-// FIXME: incorporate into #Build
-#ImageFromDockerfile: {
-	// Dockerfile passed as a string
-	dockerfile: string @dagger(input)
-
-	// Build context
-	context: dagger.#Artifact @dagger(input)
-
-	#up: [
-		op.#DockerBuild & {
-			"context":    context
-			"dockerfile": dockerfile
-		},
-	]
 }
